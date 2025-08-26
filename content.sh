@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# author-create.sh - Strapi Content Type Creator for Author
-# Generated automatically from schema: authors
-# Fields: 8 | Created: $(date)
+# category-create.sh - Strapi Content Type Creator for Category
+# Generated automatically from schema: categories
+# Fields: 7 | Created: $(date)
 
 API_DIR="/srv/app/src/api"
 
 create_content_type() {
-    local name="author"
-    local display_name="Author"
+    local name="category"
+    local display_name="Category"
     
     # Create directories
     mkdir -p "$API_DIR/$name/content-types/$name"
@@ -20,12 +20,12 @@ create_content_type() {
     cat > "$API_DIR/$name/content-types/$name/schema.json" << EOF
 {
   "kind": "collectionType",
-  "collectionName": "authors",
+  "collectionName": "categories",
   "info": {
-    "singularName": "author",
-    "pluralName": "authors",
-    "displayName": "Author",
-    "description": "Blog authors and contributors"
+    "singularName": "category",
+    "pluralName": "categories",
+    "displayName": "Category",
+    "description": "Blog post categories"
   },
   "options": {
     "draftAndPublish": false
@@ -33,12 +33,11 @@ create_content_type() {
   "attributes": {
     "name": { "type": "string", "required": true },
     "slug": { "type": "uid", "targetField": "name" },
-    "email": { "type": "email", "required": true },
-    "bio": { "type": "text", "maxLength": 1000 },
-    "avatar": { "type": "media", "allowedTypes": ["images"] },
-    "socialLinks": { "type": "json" },
-    "isActive": { "type": "boolean", "default": true },
-    "blogs": { "type": "relation", "relation": "oneToMany", "target": "api::blog.blog" }
+    "description": { "type": "text" },
+    "color": { "type": "string" },
+    "icon": { "type": "string" },
+    "parentCategory": { "type": "relation", "relation": "manyToOne", "target": "api::category.category" },
+    "blogs": { "type": "relation", "relation": "manyToMany", "target": "api::blog.blog" }
   }
 }
 EOF
@@ -67,6 +66,6 @@ EOF
 # Create the content type
 create_content_type
 
-echo "Content type 'author' created successfully!"
-echo "📁 Files created in: $API_DIR/author/"
+echo "Content type 'category' created successfully!"
+echo "📁 Files created in: $API_DIR/category/"
 echo "🔄 Restart Strapi to see the new content type in the admin panel"
