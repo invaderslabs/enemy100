@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# category-create.sh - Strapi Content Type Creator for Category
-# Generated automatically from schema: categories
-# Fields: 7 | Created: $(date)
+# tag-create.sh - Strapi Content Type Creator for Tag
+# Generated automatically from schema: tags
+# Fields: 5 | Created: $(date)
 
 API_DIR="/srv/app/src/api"
 
 create_content_type() {
-    local name="category"
-    local display_name="Category"
+    local name="tag"
+    local display_name="Tag"
     
     # Create directories
     mkdir -p "$API_DIR/$name/content-types/$name"
@@ -20,12 +20,12 @@ create_content_type() {
     cat > "$API_DIR/$name/content-types/$name/schema.json" << EOF
 {
   "kind": "collectionType",
-  "collectionName": "categories",
+  "collectionName": "tags",
   "info": {
-    "singularName": "category",
-    "pluralName": "categories",
-    "displayName": "Category",
-    "description": "Blog post categories"
+    "singularName": "tag",
+    "pluralName": "tags",
+    "displayName": "Tag",
+    "description": "Blog post tags"
   },
   "options": {
     "draftAndPublish": false
@@ -35,8 +35,6 @@ create_content_type() {
     "slug": { "type": "uid", "targetField": "name" },
     "description": { "type": "text" },
     "color": { "type": "string" },
-    "icon": { "type": "string" },
-    "parentCategory": { "type": "relation", "relation": "manyToOne", "target": "api::category.category" },
     "blogs": { "type": "relation", "relation": "manyToMany", "target": "api::blog.blog" }
   }
 }
@@ -66,6 +64,6 @@ EOF
 # Create the content type
 create_content_type
 
-echo "Content type 'category' created successfully!"
-echo "📁 Files created in: $API_DIR/category/"
+echo "Content type 'tag' created successfully!"
+echo "📁 Files created in: $API_DIR/tag/"
 echo "🔄 Restart Strapi to see the new content type in the admin panel"
