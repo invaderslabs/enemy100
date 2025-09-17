@@ -1,0 +1,53 @@
+{
+  "name": "LockBit 3.0",
+  "slug": "lockbit-3",
+  "status": "active",
+  "country": "Russia",
+  "addedDate": "2022-06-27",
+  "lastActivity": "2024-03-15",
+  "firstSeen": "2022-06-27",
+  "sectorTarget": "Various",
+  "victims": "1,500+",
+  "avgRansom": "$50,000",
+  "recentActivity": {
+    "liveUpdates": [
+      {"update": "No recent activity detected", "timestamp": "2024-03-15T10:30:00Z", "type": "info"}
+    ],
+    "monitoringStatus": "Group under monitoring since discovery",
+    "infrastructureAssessment": "Infrastructure assessment ongoing"
+  },
+  "publications": [
+    {
+      "title": "LockBit 3.0 Analysis Report",
+      "source": "CISA",
+      "date": "2024-03-10",
+      "url": "https://example.com/report",
+      "type": "report",
+      "description": "Comprehensive analysis of LockBit 3.0 operations"
+    }
+  ],
+  "technicalIntel": {
+    "hashes": [
+      {"hash": "a1b2c3d4e5f6...", "type": "sha256", "description": "Main payload"}
+    ],
+    "c2Domains": [
+      {"domain": "malicious-domain.com", "status": "active", "description": "Command and control server"}
+    ],
+    "attackVectors": [
+      {"vector": "RDP Brute Force", "description": "Primary attack method", "severity": "high"}
+    ],
+    "iocs": [
+      {"type": "ip", "value": "192.168.1.1", "description": "Suspicious IP", "confidence": "high"}
+    ]
+  },
+  "threatTrends": {
+    "activityLevel": "high",
+    "targetFocus": [
+      {"sector": "Healthcare", "percentage": 25, "trend": "increasing"},
+      {"sector": "Finance", "percentage": 40, "trend": "stable"}
+    ],
+    "threatLevel": "high",
+    "trendDirection": "increasing",
+    "analysis": "LockBit 3.0 continues to be one of the most active ransomware groups..."
+  }
+}
