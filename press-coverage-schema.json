@@ -1,0 +1,67 @@
+{
+  "kind": "collectionType",
+  "collectionName": "press_coverage",
+  "info": {
+    "singularName": "press-coverage",
+    "pluralName": "press-coverage",
+    "displayName": "Press Coverage",
+    "description": "Media coverage and press reports for ransomware attacks"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "link": {
+      "type": "string",
+      "required": false,
+      "maxLength": 500,
+      "description": "Ransomware.live link to the incident"
+    },
+    "source": {
+      "type": "string",
+      "required": false,
+      "maxLength": 500,
+      "description": "News source URL"
+    },
+    "summary": {
+      "type": "richtext",
+      "required": false,
+      "description": "Article summary or excerpt"
+    },
+    "title": {
+      "type": "string",
+      "required": false,
+      "maxLength": 255,
+      "description": "Article title"
+    },
+    "publishedDate": {
+      "type": "datetime",
+      "required": false,
+      "description": "When the article was published"
+    },
+    "language": {
+      "type": "string",
+      "required": false,
+      "maxLength": 10,
+      "description": "Article language (en, fr, de, etc.)"
+    },
+    "sentiment": {
+      "type": "enumeration",
+      "enum": [
+        "positive",
+        "negative",
+        "neutral",
+        "unknown"
+      ],
+      "required": false,
+      "description": "Sentiment analysis of the article"
+    },
+    "victim": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::victim.victim",
+      "inversedBy": "press"
+    }
+  }
+}
