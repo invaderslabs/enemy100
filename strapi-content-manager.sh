@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo "🚀 Simple Strapi Content Types Deployment Script"
-echo "================================================"
+echo "🚀 Update Existing Strapi Content Types"
+echo "======================================"
 
 # Function to update content type
 update_content_type() {
@@ -367,7 +367,7 @@ echo '{
 echo "✅ ransomware-tracker-groups-schema-no-relations.json created"
 
 echo ""
-echo "📋 PHASE 2: Creating/Updating content types WITHOUT relationships..."
+echo "📋 PHASE 2: Updating existing content types WITHOUT relationships..."
 
 # Update all content types without relationships
 update_content_type "victim" "victims-schema-no-relations.json"
@@ -380,7 +380,8 @@ update_content_type "ransomware-tracker" "ransomware-tracker-groups-schema-no-re
 echo ""
 echo "🎉 PHASE 1 COMPLETE!"
 echo "===================="
-echo "✅ All content types created WITHOUT relationships"
+echo "✅ All existing content types updated WITHOUT relationships"
 echo "✅ No circular dependencies"
+echo "✅ Strapi should now start without memory issues"
 echo ""
-echo "🔄 Next: Add relationships manually or run phase 2 script"
+echo "🔄 Next: Add relationships manually in admin panel or run phase 2"
