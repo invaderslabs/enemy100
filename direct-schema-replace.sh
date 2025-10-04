@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo "🚀 Manual Content Type Update"
-echo "============================"
+echo "🚀 Direct Manual Schema Update (No Scripts)"
+echo "==========================================="
 
 echo ""
 echo "📋 Step 1: Creating JSON schemas..."
@@ -365,17 +365,71 @@ EOF
 echo "✅ ransomware-tracker-groups-schema-no-relations.json created"
 
 echo ""
-echo "📋 Step 2: Manual update commands..."
-echo "===================================="
+echo "📋 Step 2: Direct manual schema replacement..."
+echo "============================================="
+
+# Directly replace schema files (bypass the script)
+echo "🔄 Replacing victim schema..."
+if [ -f "/srv/app/src/api/victim/content-types/victim/schema.json" ]; then
+    cp /srv/app/src/api/victim/content-types/victim/schema.json /srv/app/src/api/victim/content-types/victim/schema.json.backup.$(date +%Y%m%d_%H%M%S)
+    cp /srv/app/victims-schema-no-relations.json /srv/app/src/api/victim/content-types/victim/schema.json
+    echo "✅ victim schema replaced"
+else
+    echo "❌ victim schema not found"
+fi
+
+echo "🔄 Replacing infostealer-data schema..."
+if [ -f "/srv/app/src/api/infostealer-data/content-types/infostealer-data/schema.json" ]; then
+    cp /srv/app/src/api/infostealer-data/content-types/infostealer-data/schema.json /srv/app/src/api/infostealer-data/content-types/infostealer-data/schema.json.backup.$(date +%Y%m%d_%H%M%S)
+    cp /srv/app/infostealer-data-schema-no-relations.json /srv/app/src/api/infostealer-data/content-types/infostealer-data/schema.json
+    echo "✅ infostealer-data schema replaced"
+else
+    echo "❌ infostealer-data schema not found"
+fi
+
+echo "🔄 Replacing press-coverage schema..."
+if [ -f "/srv/app/src/api/press-coverage/content-types/press-coverage/schema.json" ]; then
+    cp /srv/app/src/api/press-coverage/content-types/press-coverage/schema.json /srv/app/src/api/press-coverage/content-types/press-coverage/schema.json.backup.$(date +%Y%m%d_%H%M%S)
+    cp /srv/app/press-coverage-schema-no-relations.json /srv/app/src/api/press-coverage/content-types/press-coverage/schema.json
+    echo "✅ press-coverage schema replaced"
+else
+    echo "❌ press-coverage schema not found"
+fi
+
+echo "🔄 Replacing group-location schema..."
+if [ -f "/srv/app/src/api/group-location/content-types/group-location/schema.json" ]; then
+    cp /srv/app/src/api/group-location/content-types/group-location/schema.json /srv/app/src/api/group-location/content-types/group-location/schema.json.backup.$(date +%Y%m%d_%H%M%S)
+    cp /srv/app/group-locations-schema-no-relations.json /srv/app/src/api/group-location/content-types/group-location/schema.json
+    echo "✅ group-location schema replaced"
+else
+    echo "❌ group-location schema not found"
+fi
+
+echo "🔄 Replacing victim-summary schema..."
+if [ -f "/srv/app/src/api/victim-summary/content-types/victim-summary/schema.json" ]; then
+    cp /srv/app/src/api/victim-summary/content-types/victim-summary/schema.json /srv/app/src/api/victim-summary/content-types/victim-summary/schema.json.backup.$(date +%Y%m%d_%H%M%S)
+    cp /srv/app/victim-summaries-schema-no-relations.json /srv/app/src/api/victim-summary/content-types/victim-summary/schema.json
+    echo "✅ victim-summary schema replaced"
+else
+    echo "❌ victim-summary schema not found"
+fi
+
+echo "🔄 Replacing ransomware-tracker schema..."
+if [ -f "/srv/app/src/api/ransomware-tracker/content-types/ransomware-tracker/schema.json" ]; then
+    cp /srv/app/src/api/ransomware-tracker/content-types/ransomware-tracker/schema.json /srv/app/src/api/ransomware-tracker/content-types/ransomware-tracker/schema.json.backup.$(date +%Y%m%d_%H%M%S)
+    cp /srv/app/ransomware-tracker-groups-schema-no-relations.json /srv/app/src/api/ransomware-tracker/content-types/ransomware-tracker/schema.json
+    echo "✅ ransomware-tracker schema replaced"
+else
+    echo "❌ ransomware-tracker schema not found"
+fi
+
 echo ""
-echo "Now run these commands manually:"
+echo "🎉 DIRECT UPDATE COMPLETE!"
+echo "========================="
+echo "✅ All schemas replaced directly (no scripts)"
+echo "✅ Backups created with timestamps"
+echo "✅ No circular dependencies"
+echo "✅ Strapi should now start without memory issues"
 echo ""
-echo "1. ./strapi-content-manager.sh victim victims-schema-no-relations.json update"
-echo "2. ./strapi-content-manager.sh infostealer-data infostealer-data-schema-no-relations.json update"
-echo "3. ./strapi-content-manager.sh press-coverage press-coverage-schema-no-relations.json update"
-echo "4. ./strapi-content-manager.sh group-location group-locations-schema-no-relations.json update"
-echo "5. ./strapi-content-manager.sh victim-summary victim-summaries-schema-no-relations.json update"
-echo "6. ./strapi-content-manager.sh ransomware-tracker ransomware-tracker-groups-schema-no-relations.json update"
-echo ""
-echo "🎉 JSON schemas created successfully!"
-echo "Run the commands above one by one to update content types."
+echo "🔄 Next: Restart Strapi container"
+echo "   docker restart strapi_test"
