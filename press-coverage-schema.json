@@ -14,48 +14,19 @@
   "attributes": {
     "link": {
       "type": "string",
-      "required": false,
-      "maxLength": 500,
-      "description": "Ransomware.live link to the incident"
+      "required": true
     },
     "source": {
       "type": "string",
-      "required": false,
-      "maxLength": 500,
-      "description": "News source URL"
+      "required": false
     },
     "summary": {
-      "type": "richtext",
-      "required": false,
-      "description": "Article summary or excerpt"
+      "type": "text",
+      "required": false
     },
-    "title": {
-      "type": "string",
-      "required": false,
-      "maxLength": 255,
-      "description": "Article title"
-    },
-    "publishedDate": {
-      "type": "datetime",
-      "required": false,
-      "description": "When the article was published"
-    },
-    "language": {
-      "type": "string",
-      "required": false,
-      "maxLength": 10,
-      "description": "Article language (en, fr, de, etc.)"
-    },
-    "sentiment": {
-      "type": "enumeration",
-      "enum": [
-        "positive",
-        "negative",
-        "neutral",
-        "unknown"
-      ],
-      "required": false,
-      "description": "Sentiment analysis of the article"
+    "date": {
+      "type": "date",
+      "required": false
     },
     "victim": {
       "type": "relation",
