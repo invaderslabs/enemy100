@@ -1,0 +1,134 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ransomware_trackers",
+  "info": {
+    "singularName": "ransomware-tracker",
+    "pluralName": "ransomware-trackers",
+    "displayName": "Ransomware Tracker",
+    "description": "Ransomware groups and their comprehensive data"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "pageType": {
+      "type": "enumeration",
+      "enum": ["dashboard", "group-profile"],
+      "required": true,
+      "unique": false
+    },
+    "dashboardData": {
+      "type": "json",
+      "required": false
+    },
+    "groupData": {
+      "type": "json",
+      "required": false
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "Image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["active", "rebranded", "state-sponsored", "unknown"],
+      "required": false
+    },
+    "country": {
+      "type": "string",
+      "required": false
+    },
+    "sectorTarget": {
+      "type": "string",
+      "required": false
+    },
+    "lastActivity": {
+      "type": "date",
+      "required": false
+    },
+    "victims": {
+      "type": "string",
+      "required": false
+    },
+    "avgRansom": {
+      "type": "string",
+      "required": false
+    },
+    "groupstatus": {
+      "type": "enumeration",
+      "enum": ["active", "inactive", "rebranded", "unknown"],
+      "required": false
+    },
+    "totalLocations": {
+      "type": "integer",
+      "required": false,
+      "min": 0,
+      "description": "Total number of infrastructure locations for this group"
+    },
+    "activeLocations": {
+      "type": "integer",
+      "required": false,
+      "min": 0,
+      "description": "Number of currently active infrastructure locations"
+    },
+    "researchLinks": {
+      "type": "json",
+      "required": false,
+      "description": "Array of research and analysis links related to this group"
+    },
+    "tools": {
+      "type": "json",
+      "required": false,
+      "description": "Tools and techniques used by the group, organized by category"
+    },
+    "ttps": {
+      "type": "json",
+      "required": false,
+      "description": "Tactics, Techniques, and Procedures used by the group"
+    },
+    "parserEnabled": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "description": "Whether automated parsing is enabled for this group"
+    },
+    "victimsData": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::victim.victim",
+      "mappedBy": "group",
+      "description": "Detailed victim data for this group (separate from victims string field)"
+    },
+    "locations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::group-location.group-location",
+      "mappedBy": "group",
+      "description": "Infrastructure locations and domains for this group"
+    },
+    "victimSummary": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::victim-summary.victim-summary",
+      "mappedBy": "group",
+      "description": "Aggregated victim statistics and summaries for this group"
+    }
+  }
+}
