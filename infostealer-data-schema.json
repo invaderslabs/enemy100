@@ -25,7 +25,7 @@
     "infostealerStats": {
       "type": "json",
       "required": false,
-      "description": "Statistics for different infostealer types (Lumma, Raccoon, RedLine, etc.)"
+      "description": "Statistics for different infostealer types"
     },
     "thirdparties": {
       "type": "integer",
