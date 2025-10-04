@@ -94,7 +94,7 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::ransomware-tracker.ransomware-tracker",
-      "inversedBy": "victims"
+      "inversedBy": "victimsData"
     },
     "infostealer": {
       "type": "relation",
