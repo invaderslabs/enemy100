@@ -1,0 +1,61 @@
+{
+  "kind": "collectionType",
+  "collectionName": "infostealer_data",
+  "info": {
+    "singularName": "infostealer-data",
+    "pluralName": "infostealer-data",
+    "displayName": "Infostealer Data",
+    "description": "Infostealer statistics and data breach information"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "employees": {
+      "type": "integer",
+      "required": false,
+      "min": 0
+    },
+    "employeesUrl": {
+      "type": "integer",
+      "required": false,
+      "min": 0
+    },
+    "infostealerStats": {
+      "type": "json",
+      "required": false,
+      "description": "Statistics for different infostealer types (Lumma, Raccoon, RedLine, etc.)"
+    },
+    "thirdparties": {
+      "type": "integer",
+      "required": false,
+      "min": 0
+    },
+    "thirdpartiesDomain": {
+      "type": "integer",
+      "required": false,
+      "min": 0
+    },
+    "update": {
+      "type": "datetime",
+      "required": false
+    },
+    "users": {
+      "type": "integer",
+      "required": false,
+      "min": 0
+    },
+    "usersUrl": {
+      "type": "integer",
+      "required": false,
+      "min": 0
+    },
+    "victim": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::victim.victim",
+      "inversedBy": "infostealer"
+    }
+  }
+}
