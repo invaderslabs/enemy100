@@ -1,0 +1,112 @@
+{
+  "kind": "collectionType",
+  "collectionName": "victims",
+  "info": {
+    "singularName": "victim",
+    "pluralName": "victims",
+    "displayName": "Ransomware Victims",
+    "description": "Comprehensive victim data from ransomware attacks"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "victim": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 255
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "victim",
+      "required": true
+    },
+    "description": {
+      "type": "richtext",
+      "required": false
+    },
+    "domain": {
+      "type": "string",
+      "required": false,
+      "maxLength": 255
+    },
+    "attackDate": {
+      "type": "datetime",
+      "required": true
+    },
+    "discovered": {
+      "type": "datetime",
+      "required": true
+    },
+    "claimUrl": {
+      "type": "string",
+      "required": false,
+      "maxLength": 500
+    },
+    "screenshot": {
+      "type": "string",
+      "required": false,
+      "maxLength": 500
+    },
+    "url": {
+      "type": "string",
+      "required": false,
+      "maxLength": 500
+    },
+    "country": {
+      "type": "string",
+      "required": false,
+      "maxLength": 10
+    },
+    "activity": {
+      "type": "string",
+      "required": false,
+      "maxLength": 100
+    },
+    "sector": {
+      "type": "enumeration",
+      "enum": [
+        "Technology",
+        "Business Services",
+        "Healthcare",
+        "Public Sector",
+        "Financial Services",
+        "Education",
+        "Construction",
+        "Manufacturing",
+        "Hospitality and Tourism",
+        "Consumer Services",
+        "Not Found"
+      ],
+      "required": false
+    },
+    "duplicates": {
+      "type": "json",
+      "required": false
+    },
+    "extrainfos": {
+      "type": "json",
+      "required": false
+    },
+    "group": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::ransomware-tracker.ransomware-tracker",
+      "inversedBy": "victims"
+    },
+    "infostealer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::infostealer-data.infostealer-data",
+      "mappedBy": "victim"
+    },
+    "press": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::press-coverage.press-coverage",
+      "mappedBy": "victim"
+    }
+  }
+}
