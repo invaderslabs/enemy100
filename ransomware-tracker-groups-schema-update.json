@@ -79,56 +79,47 @@
     "totalLocations": {
       "type": "integer",
       "required": false,
-      "min": 0,
-      "description": "Total number of infrastructure locations for this group"
+      "min": 0
     },
     "activeLocations": {
       "type": "integer",
       "required": false,
-      "min": 0,
-      "description": "Number of currently active infrastructure locations"
+      "min": 0
     },
     "researchLinks": {
       "type": "json",
-      "required": false,
-      "description": "Array of research and analysis links related to this group"
+      "required": false
     },
     "tools": {
       "type": "json",
-      "required": false,
-      "description": "Tools and techniques used by the group, organized by category"
+      "required": false
     },
     "ttps": {
       "type": "json",
-      "required": false,
-      "description": "Tactics, Techniques, and Procedures used by the group"
+      "required": false
     },
     "parserEnabled": {
       "type": "boolean",
       "required": false,
-      "default": false,
-      "description": "Whether automated parsing is enabled for this group"
+      "default": false
     },
     "victimsData": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::victim.victim",
-      "mappedBy": "group",
-      "description": "Detailed victim data for this group (separate from victims string field)"
+      "mappedBy": "group"
     },
     "locations": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::group-location.group-location",
-      "mappedBy": "group",
-      "description": "Infrastructure locations and domains for this group"
+      "mappedBy": "group"
     },
     "victimSummary": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::victim-summary.victim-summary",
-      "mappedBy": "group",
-      "description": "Aggregated victim statistics and summaries for this group"
+      "mappedBy": "group"
     }
   }
 }
