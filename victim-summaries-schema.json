@@ -1,0 +1,74 @@
+{
+  "kind": "collectionType",
+  "collectionName": "victim_summaries",
+  "info": {
+    "singularName": "victim-summary",
+    "pluralName": "victim-summaries",
+    "displayName": "Victim Summaries",
+    "description": "Aggregated statistics and summaries for ransomware groups"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "totalVictims": {
+      "type": "integer",
+      "required": true,
+      "min": 0,
+      "description": "Total number of victims for this group"
+    },
+    "countries": {
+      "type": "json",
+      "required": false,
+      "description": "Victim count by country (e.g., {\"US\": 12, \"CA\": 1})"
+    },
+    "sectors": {
+      "type": "json",
+      "required": false,
+      "description": "Victim count by sector (e.g., {\"Technology\": 2, \"Healthcare\": 2})"
+    },
+    "attackDates": {
+      "type": "json",
+      "required": false,
+      "description": "Victim count by attack date (e.g., {\"2025-10-03\": 2})"
+    },
+    "recentAttacks": {
+      "type": "json",
+      "required": false,
+      "description": "Array of recent attack objects with victim details"
+    },
+    "monthlyTrends": {
+      "type": "json",
+      "required": false,
+      "description": "Monthly attack trends and statistics"
+    },
+    "topCountries": {
+      "type": "json",
+      "required": false,
+      "description": "Top countries by victim count"
+    },
+    "topSectors": {
+      "type": "json",
+      "required": false,
+      "description": "Top sectors by victim count"
+    },
+    "lastUpdated": {
+      "type": "datetime",
+      "required": true,
+      "description": "When this summary was last updated"
+    },
+    "dataSource": {
+      "type": "string",
+      "required": false,
+      "maxLength": 100,
+      "description": "Source of the data (e.g., ransomware.live, manual)"
+    },
+    "group": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::ransomware-tracker.ransomware-tracker",
+      "inversedBy": "victimSummary"
+    }
+  }
+}
