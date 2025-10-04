@@ -4,7 +4,7 @@
   "info": {
     "singularName": "group-location",
     "pluralName": "group-locations",
-    "displayName": "Group Locations",
+    "displayName": "Group Location",
     "description": "Infrastructure locations and domains for ransomware groups"
   },
   "options": {
@@ -14,56 +14,20 @@
   "attributes": {
     "fqdn": {
       "type": "string",
-      "required": true,
-      "unique": true,
-      "maxLength": 255,
-      "description": "Fully qualified domain name (.onion domain)"
+      "required": true
     },
     "type": {
-      "type": "enumeration",
-      "enum": [
-        "DLS",
-        "Admin",
-        "Blog",
-        "Payment",
-        "Communication",
-        "Other"
-      ],
-      "required": true,
-      "description": "Type of location/service"
+      "type": "string",
+      "required": false
     },
     "available": {
       "type": "boolean",
-      "required": true,
-      "default": false,
-      "description": "Whether the location is currently available"
-    },
-    "enabled": {
-      "type": "boolean",
-      "required": true,
-      "default": false,
-      "description": "Whether the location is enabled for scraping"
+      "required": false,
+      "default": true
     },
     "lastScrape": {
       "type": "datetime",
-      "required": false,
-      "description": "Last time the location was scraped"
-    },
-    "updated": {
-      "type": "datetime",
-      "required": false,
-      "description": "Last time the location was updated"
-    },
-    "title": {
-      "type": "string",
-      "required": false,
-      "maxLength": 100,
-      "description": "Human-readable title for the location"
-    },
-    "description": {
-      "type": "text",
-      "required": false,
-      "description": "Description of the location's purpose"
+      "required": false
     },
     "group": {
       "type": "relation",
