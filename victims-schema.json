@@ -4,8 +4,8 @@
   "info": {
     "singularName": "victim",
     "pluralName": "victims",
-    "displayName": "Ransomware Victims",
-    "description": "Comprehensive victim data from ransomware attacks"
+    "displayName": "Victim",
+    "description": "Ransomware attack victims"
   },
   "options": {
     "draftAndPublish": true
@@ -14,76 +14,22 @@
   "attributes": {
     "victim": {
       "type": "string",
-      "required": true,
-      "unique": true,
-      "maxLength": 255
-    },
-    "slug": {
-      "type": "uid",
-      "targetField": "victim",
       "required": true
     },
     "description": {
-      "type": "richtext",
+      "type": "text",
       "required": false
     },
-    "domain": {
-      "type": "string",
-      "required": false,
-      "maxLength": 255
-    },
     "attackDate": {
-      "type": "datetime",
-      "required": true
-    },
-    "discovered": {
-      "type": "datetime",
-      "required": true
-    },
-    "claimUrl": {
-      "type": "string",
-      "required": false,
-      "maxLength": 500
-    },
-    "screenshot": {
-      "type": "string",
-      "required": false,
-      "maxLength": 500
-    },
-    "url": {
-      "type": "string",
-      "required": false,
-      "maxLength": 500
+      "type": "date",
+      "required": false
     },
     "country": {
       "type": "string",
-      "required": false,
-      "maxLength": 10
+      "required": false
     },
     "activity": {
       "type": "string",
-      "required": false,
-      "maxLength": 100
-    },
-    "sector": {
-      "type": "enumeration",
-      "enum": [
-        "Technology",
-        "Business Services",
-        "Healthcare",
-        "Public Sector",
-        "Financial Services",
-        "Education",
-        "Construction",
-        "Manufacturing",
-        "Hospitality and Tourism",
-        "Consumer Services",
-        "Not Found"
-      ],
-      "required": false
-    },
-    "duplicates": {
-      "type": "json",
       "required": false
     },
     "extrainfos": {
