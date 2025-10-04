@@ -3,7 +3,7 @@
   "collectionName": "press_coverage",
   "info": {
     "singularName": "press-coverage",
-    "pluralName": "press-coverage",
+    "pluralName": "press-coverages",
     "displayName": "Press Coverage",
     "description": "Media coverage and press reports for ransomware attacks"
   },
