@@ -1,25 +1,18 @@
 #!/bin/bash
 
-echo "🚀 Complete Strapi Content Types Deployment Script (Self-Contained)"
-echo "================================================================="
+echo "🚀 Complete Strapi Content Types Deployment Script (Run from INSIDE container)"
+echo "============================================================================="
 
-# Check if we're running from host or inside container
-if [ -f /.dockerenv ]; then
-    echo "❌ This script must be run from the HOST machine, not inside the container!"
-    echo "   Run: ./deploy-all-content-types-embedded.sh"
-    exit 1
-fi
-
-# Function to create JSON file in container
-create_json_in_container() {
+# Function to create JSON file
+create_json_file() {
     local filename="$1"
     local content="$2"
-    echo "📁 Creating $filename in container..."
+    echo "📁 Creating $filename..."
     
     # Create the JSON file content
-    docker exec strapi_test bash -c "cat > /srv/app/$filename << 'EOF'
+    cat > "/srv/app/$filename" << 'EOF'
 $content
-EOF"
+EOF
     
     if [ $? -eq 0 ]; then
         echo "✅ $filename created successfully"
@@ -34,7 +27,7 @@ update_content_type() {
     local content_type="$1"
     local schema_file="$2"
     echo "🔄 Updating $content_type content type..."
-    docker exec strapi_test ./strapi-content-manager.sh "$content_type" "$schema_file" update
+    ./strapi-content-manager.sh "$content_type" "$schema_file" update
     if [ $? -eq 0 ]; then
         echo "✅ $content_type updated successfully"
     else
@@ -44,11 +37,12 @@ update_content_type() {
 }
 
 echo ""
-echo "📋 PHASE 1: Creating NO-RELATIONS schemas in container..."
-echo "========================================================"
+echo "📋 PHASE 1: Creating NO-RELATIONS schemas..."
+echo "============================================"
 
 # Create victims-schema-no-relations.json
-create_json_in_container "victims-schema-no-relations.json" '{
+cat > "/srv/app/victims-schema-no-relations.json" << 'EOF'
+{
   "kind": "collectionType",
   "collectionName": "victims",
   "info": {
@@ -91,10 +85,13 @@ create_json_in_container "victims-schema-no-relations.json" '{
       "required": false
     }
   }
-}'
+}
+EOF
+echo "✅ victims-schema-no-relations.json created"
 
 # Create infostealer-data-schema-no-relations.json
-create_json_in_container "infostealer-data-schema-no-relations.json" '{
+cat > "/srv/app/infostealer-data-schema-no-relations.json" << 'EOF'
+{
   "kind": "collectionType",
   "collectionName": "infostealer_data",
   "info": {
@@ -152,10 +149,13 @@ create_json_in_container "infostealer-data-schema-no-relations.json" '{
       "required": false
     }
   }
-}'
+}
+EOF
+echo "✅ infostealer-data-schema-no-relations.json created"
 
 # Create press-coverage-schema-no-relations.json
-create_json_in_container "press-coverage-schema-no-relations.json" '{
+cat > "/srv/app/press-coverage-schema-no-relations.json" << 'EOF'
+{
   "kind": "collectionType",
   "collectionName": "press_coverage",
   "info": {
@@ -190,10 +190,13 @@ create_json_in_container "press-coverage-schema-no-relations.json" '{
       "required": false
     }
   }
-}'
+}
+EOF
+echo "✅ press-coverage-schema-no-relations.json created"
 
 # Create group-locations-schema-no-relations.json
-create_json_in_container "group-locations-schema-no-relations.json" '{
+cat > "/srv/app/group-locations-schema-no-relations.json" << 'EOF'
+{
   "kind": "collectionType",
   "collectionName": "group_locations",
   "info": {
@@ -229,10 +232,13 @@ create_json_in_container "group-locations-schema-no-relations.json" '{
       "required": false
     }
   }
-}'
+}
+EOF
+echo "✅ group-locations-schema-no-relations.json created"
 
 # Create victim-summaries-schema-no-relations.json
-create_json_in_container "victim-summaries-schema-no-relations.json" '{
+cat > "/srv/app/victim-summaries-schema-no-relations.json" << 'EOF'
+{
   "kind": "collectionType",
   "collectionName": "victim_summaries",
   "info": {
@@ -276,10 +282,13 @@ create_json_in_container "victim-summaries-schema-no-relations.json" '{
       "required": false
     }
   }
-}'
+}
+EOF
+echo "✅ victim-summaries-schema-no-relations.json created"
 
 # Create ransomware-tracker-groups-schema-no-relations.json
-create_json_in_container "ransomware-tracker-groups-schema-no-relations.json" '{
+cat > "/srv/app/ransomware-tracker-groups-schema-no-relations.json" << 'EOF'
+{
   "kind": "collectionType",
   "collectionName": "ransomware_trackers",
   "info": {
@@ -385,7 +394,9 @@ create_json_in_container "ransomware-tracker-groups-schema-no-relations.json" '{
       "default": false
     }
   }
-}'
+}
+EOF
+echo "✅ ransomware-tracker-groups-schema-no-relations.json created"
 
 echo ""
 echo "📋 PHASE 2: Creating/Updating content types WITHOUT relationships..."
@@ -400,11 +411,12 @@ update_content_type "victim-summary" "victim-summaries-schema-no-relations.json"
 update_content_type "ransomware-tracker" "ransomware-tracker-groups-schema-no-relations.json"
 
 echo ""
-echo "📋 PHASE 3: Creating WITH-RELATIONS schemas in container..."
-echo "========================================================="
+echo "📋 PHASE 3: Creating WITH-RELATIONS schemas..."
+echo "=============================================="
 
 # Create victims-schema-with-relations.json
-create_json_in_container "victims-schema-with-relations.json" '{
+cat > "/srv/app/victims-schema-with-relations.json" << 'EOF'
+{
   "kind": "collectionType",
   "collectionName": "victims",
   "info": {
@@ -461,10 +473,13 @@ create_json_in_container "victims-schema-with-relations.json" '{
       "mappedBy": "victim"
     }
   }
-}'
+}
+EOF
+echo "✅ victims-schema-with-relations.json created"
 
 # Create infostealer-data-schema-with-relations.json
-create_json_in_container "infostealer-data-schema-with-relations.json" '{
+cat > "/srv/app/infostealer-data-schema-with-relations.json" << 'EOF'
+{
   "kind": "collectionType",
   "collectionName": "infostealer_data",
   "info": {
@@ -524,10 +539,13 @@ create_json_in_container "infostealer-data-schema-with-relations.json" '{
       "inversedBy": "infostealer"
     }
   }
-}'
+}
+EOF
+echo "✅ infostealer-data-schema-with-relations.json created"
 
 # Create press-coverage-schema-with-relations.json
-create_json_in_container "press-coverage-schema-with-relations.json" '{
+cat > "/srv/app/press-coverage-schema-with-relations.json" << 'EOF'
+{
   "kind": "collectionType",
   "collectionName": "press_coverage",
   "info": {
@@ -564,10 +582,13 @@ create_json_in_container "press-coverage-schema-with-relations.json" '{
       "inversedBy": "press"
     }
   }
-}'
+}
+EOF
+echo "✅ press-coverage-schema-with-relations.json created"
 
 # Create group-locations-schema-with-relations.json
-create_json_in_container "group-locations-schema-with-relations.json" '{
+cat > "/srv/app/group-locations-schema-with-relations.json" << 'EOF'
+{
   "kind": "collectionType",
   "collectionName": "group_locations",
   "info": {
@@ -605,10 +626,13 @@ create_json_in_container "group-locations-schema-with-relations.json" '{
       "inversedBy": "locations"
     }
   }
-}'
+}
+EOF
+echo "✅ group-locations-schema-with-relations.json created"
 
 # Create victim-summaries-schema-with-relations.json
-create_json_in_container "victim-summaries-schema-with-relations.json" '{
+cat > "/srv/app/victim-summaries-schema-with-relations.json" << 'EOF'
+{
   "kind": "collectionType",
   "collectionName": "victim_summaries",
   "info": {
@@ -654,7 +678,9 @@ create_json_in_container "victim-summaries-schema-with-relations.json" '{
       "inversedBy": "victimSummary"
     }
   }
-}'
+}
+EOF
+echo "✅ victim-summaries-schema-with-relations.json created"
 
 echo ""
 echo "📋 PHASE 4: Adding relationships to content types..."
@@ -672,7 +698,8 @@ echo "📋 PHASE 5: Final ransomware-tracker update with all relationships..."
 echo "=================================================================="
 
 # Create the final ransomware-tracker schema (your working one)
-create_json_in_container "ransomware-tracker-groups-schema-simple.json" '{
+cat > "/srv/app/ransomware-tracker-groups-schema-simple.json" << 'EOF'
+{
   "kind": "collectionType",
   "collectionName": "ransomware_trackers",
   "info": {
@@ -796,7 +823,9 @@ create_json_in_container "ransomware-tracker-groups-schema-simple.json" '{
       "mappedBy": "group"
     }
   }
-}'
+}
+EOF
+echo "✅ ransomware-tracker-groups-schema-simple.json created"
 
 # Final ransomware-tracker update with all relationships
 update_content_type "ransomware-tracker" "ransomware-tracker-groups-schema-simple.json"
@@ -807,9 +836,6 @@ echo "======================"
 echo "✅ All content types created/updated successfully"
 echo "✅ All relationships established"
 echo "✅ No circular dependencies"
-echo ""
-echo "🚀 You can now start your Strapi container:"
-echo "   docker start strapi_test"
 echo ""
 echo "🔍 Verify in admin panel:"
 echo "   https://api.invaders.ie/admin"
